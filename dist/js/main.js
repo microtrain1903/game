@@ -10,7 +10,7 @@ function spawn(x,y,h,w,speed){
 }
 
 function createSpawn(){
-    for(x=0;x<100;x++){
+    for(x=0;x<30;x++){
         var newSpawn = new spawn();
         spawnList.push(newSpawn);
     }
@@ -36,6 +36,10 @@ var game = (function(){
 
     function launchSpawns(obj){
         //console.log(obj);
+        if(obj.y > canvas.height){
+            obj.y=0;
+             
+        }
         ctx.fillStyle=obj.fill;
 
         ctx.clearRect(
