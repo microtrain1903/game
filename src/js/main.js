@@ -2,7 +2,7 @@ var spawnList = [];
 
 function spawn(x,y,h,w,speed){
     this.x = Math.floor(Math.random() * 800);
-    this.y = Math.floor(Math.random() * - 2000);
+    this.y = 0//Math.floor(Math.random() * - 2000);
     this.h = 10;
     this.w = 10;
     this.speed = 3//Math.floor(Math.random() * 5) + 1;
@@ -10,10 +10,10 @@ function spawn(x,y,h,w,speed){
 }
 
 function createSpawn(){
-    for(x=0;x<30;x++){
+    //for(x=0;x<2;x++){
         var newSpawn = new spawn();
         spawnList.push(newSpawn);
-    }
+    //}
 }
 
 createSpawn();
@@ -35,7 +35,7 @@ var game = (function(){
     }
 
     function launchSpawns(obj){
-        //console.log(obj);
+        checkPosition(obj);
         if(obj.y > canvas.height){
             obj.y=0;
              
@@ -51,13 +51,17 @@ var game = (function(){
     
         ctx.fillRect(
             obj.x,
-            obj.y = (obj.y + obj.speed),
+            obj.y = (obj.y + 1),
             obj.w,
             obj.h
         );
+        checkPosition(obj);
       }
 
     return{
+        getPlayer: function(){
+           return player;
+        },
         player: function(){
          ctx.fillStyle=player.fill;
          ctx.strokeStyle=player.stroke;
@@ -162,4 +166,19 @@ window.addEventListener('keyup' ,function(evt){
     
 });
 
+function checkPosition(obj)
+{
+   //console.log(obj.x);
+   //console.log(game.getPlayer());
+   if(obj.x>=game.getPlayer().x-15 && obj.x<=game.getPlayer().x+15)
+   {
+       //alert("Game Over");
+
+       if(obj.y>=game.getPlayer().y && obj.y<=game.getPlayer().y+15)
+       {
+           alert("Game Over");
+       }
+   }
+}
+ 
 
